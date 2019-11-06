@@ -71,5 +71,11 @@ defmodule GameTest do
       |> Game.make_move("g")
     assert game.game_state == :lost
   end
+
+  test "capital letters are rejected" do
+    game = Game.new_game("w") |> Game.make_move("A")
+    assert game.game_state == :invalid_guess
+    assert MapSet.size(game.used) == 0
+  end
 end
 
